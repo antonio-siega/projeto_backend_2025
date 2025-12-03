@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Gasoek+One&family=Lexend:wght@100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  outline: none;
+  text-decoration: none;
+  border: none;
+  font-family: "Lexend", sans-serif;
+  box-sizing: border-box;
+  list-style: none;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+:root {
+  --green-100: #204749;
+  --green-300: #0be664;
+
+  --white: #ffffff;
+  --white-100: #d9d9d9;
+
+  --grey-50: #cfcfcf;
+  --grey-100: #181818;
+  --grey-200: #2c2c2c;
+  --grey-300: #363636;
+
+  --red-300: #ff6b6b;
+
+  --black: #000000;
+}
