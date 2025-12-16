@@ -17,8 +17,7 @@ try {
     $pdo = $conexao->getConexao();
 
     // 4. Busca o último pedido PENDENTE deste usuário específico
-    // Regra de Negócio: Não podemos deixar pagar um pedido que não existe ou já foi pago.
-    [cite_start]// [cite: 151-163] Tabela pedido vinculada ao cliente
+    // Regra de Negócio: Não podemos deixar pagar um pedido que não existe ou já foi pago.// Tabela pedido vinculada ao cliente
     $sql = "SELECT * FROM pedido WHERE cliente_id = :uid AND status = 'pendente' ORDER BY id DESC LIMIT 1";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':uid' => $userId]);

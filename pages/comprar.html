@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Comprar Ingresso</title>
+  <link rel="stylesheet" href="../styles/home.css">
+</head>
+<body>
+  <main class="main">
+    <h1 class="title">COMPRA DE INGRESSO</h1>
+
+    <form method="POST" action="../api/criar_pagamento.php">
+      <label>Setor</label>
+      <select name="setor_id" class="input">
+        <option value="1">Auditório Principal</option>
+        <option value="2">Sala de Oficinas</option>
+      </select>
+
+      <label>Lote</label>
+      <select name="lote_id" class="input">
+        <option value="1">Lote 1 - R$30,00</option>
+        <option value="2">Lote 2 - R$40,00</option>
+      </select>
+
+      <label>Quantidade</label>
+      <input type="number" name="quantidade" class="input" value="1" min="1">
+
+      <!-- Dados fixos só para teste -->
+      <input type="hidden" name="evento_nome" value="Semana de Tecnologia IF">
+      <input type="hidden" name="preco_unitario" value="30">
+
+      <button class="button">Ir para pagamento</button>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Check-in</title>
+  <link rel="stylesheet" href="../styles/home.css">
+</head>
+<body>
+  <main class="main">
+    <h1 class="title">CHECK-IN PORTARIA</h1>
+
+    <form id="formCheckin">
+      <input
+        type="text"
+        name="token_ingresso"
+        class="input"
+        placeholder="Código do ingresso"
+        required
+      >
+      <button class="button">Validar ingresso</button>
+    </form>
+
+    <div id="resultado" class="card"></div>
+  </main>
+
+  <script>
+    document.getElementById('formCheckin').addEventListener('submit', async e => {
+      e.preventDefault();
+      const form = new FormData(e.target);
+
+      const res = await fetch('../api/validar_checkin.php', {
+        method: 'POST',
+        body: form
+      });
+
+      const data = await res.json();
+      document.getElementById('resultado').innerHTML =
+        `<p>${data.mensagem}</p>`;
+    });
+  </script>
+</body>
+</html>

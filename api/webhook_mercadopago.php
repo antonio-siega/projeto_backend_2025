@@ -9,7 +9,8 @@ require_once __DIR__ . '/../includes/mercado_pago.php';
 // Necessário para a lógica de emissão
 require_once __DIR__ . '/../IngressoService.php'; // Vamos criar essa classe auxiliar
 
-$db = Database::getConnection();
+$conexao = new Conexao();
+$db = $conexao->getConexao();
 
 // 1. Obter e Decodificar a notificação
 $data = json_decode(file_get_contents('php://input'), true);
