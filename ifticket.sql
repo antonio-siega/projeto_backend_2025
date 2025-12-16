@@ -71,6 +71,7 @@ CREATE TABLE pedido (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cliente_id INT,
     canal_venda ENUM('ecommerce', 'comissario', 'bilheteria'),
+    comissario_id INT,
     setor_id INT,
     lote_id INT,
     quantidade INT,
@@ -84,6 +85,7 @@ CREATE TABLE pedido (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (cliente_id) REFERENCES cliente (id),
+    FOREIGN KEY (comissario_id) REFERENCES comissario (id),
     FOREIGN KEY (setor_id) REFERENCES setor (id),
     FOREIGN KEY (lote_id) REFERENCES lote (id)
 );
@@ -185,7 +187,7 @@ CREATE TABLE usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     organizacao_id INT,
     nome VARCHAR(255),
-    perfil ENUM('organizador', 'bilheteria', 'financeiro', 'portaria', 'admin'),
+    perfil ENUM('organizador', 'bilheteria', 'financeiro', 'portaria', 'admin', 'cliente', 'comissario'),
     ativo BOOLEAN,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -216,3 +218,5 @@ CREATE TABLE auditoria (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuario (id)
 );
+
+
