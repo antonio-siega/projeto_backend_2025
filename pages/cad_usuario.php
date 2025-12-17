@@ -1,4 +1,13 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/cad.css" />
+</head>
+<body class="main">
+    <?php
 include "conecta.php";
 
 /* Buscar organizações para o select */
@@ -22,11 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<h2>Cadastro de Usuário</h2>
+<h2 class="title">Cadastro de Usuário</h2>
 
-<form method="post">
+<form method="post" class="form">
     <label>Nome:</label><br>
-    <input type="text" name="nome" required><br><br>
+    <input type="text" name="nome" required class="input" placeholder="BATATA"><br><br>
 
     <label>Perfil:</label><br>
     <select name="perfil" required>
@@ -54,8 +63,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
     </select><br><br>
 
-    <button type="submit">Cadastrar</button>
+    <button type="submit" class="button">Cadastrar</button>
 </form>
 
 <br>
-<a href="lista_usuario.php">Ver usuários cadastrados</a>
+<a href="lista_usuario.php" class="link">Ver usuários cadastrados</a>
+</body>
+</html>
+
+
