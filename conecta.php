@@ -4,7 +4,7 @@
 	$servidor = "localhost";
 	$usuario = "root";
 	$senha = "";
-	$nomedobanco = "evento_if";
+	$nomedobanco = "eventos_if";
 
 	//Conexão com o servidor (SGBD)
 	$bancodedados = mysqli_connect($servidor,$usuario,$senha);
