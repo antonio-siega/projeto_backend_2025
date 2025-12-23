@@ -19,12 +19,6 @@
 
       if(isset($_GET['opcao']))
       {
-        if($_GET['opcao']=='e')
-        {
-          $id = $_GET['id'];
-          $sql = "delete from comissario where id = $id";
-          mysqli_query($bancodedados, $sql);
-        }
         if($_GET['opcao']=='a')
         {
           $id = $_GET['id'];
@@ -34,7 +28,8 @@
           {
             $nome = $linha['nome'];
             $regra_comissao = $linha['regra_comissao'];
-            $dados = $linha['telefone'];
+            $dados = $linha['dados'];
+            
           }
         }
       }
@@ -54,12 +49,12 @@
 
                 <div class="form-group w-100 mb-3">
                     <label for="regra_comissao">Qual a regra de comissão?</label>
-                    <input required value="<?php if(isset($regra_comissao)) echo $regra_comissao; ?>" type="text" class="form-control" id="nome" name="nome" placeholder="Informe a regra de comissão" size="120">  
+                    <input required value="<?php if(isset($regra_comissao)) echo $regra_comissao; ?>" type="text" class="form-control" id="regra_comissao" name="regra_comissao" placeholder="Informe a regra de comissão" size="120">  
                 </div>
 
                 <div class="form-group w-100 mb-3">
-                    <label for="telefone">Telefone de contato</label>
-                    <input required value="<?php if(isset($regra_comissao)) echo $regra_comissao; ?>" type="text" class="form-control" name="telefone" id="telefone" maxlength="30"  placeholder="Telefone">  
+                    <label for="dados">Dados de contato</label>
+                    <input required value="<?php if(isset($dados)) echo $dados; ?>" type="text" class="form-control" name="dados" id="dados" maxlength="30"  placeholder="Informe os dados de contato">  
                 </div>
                 
 
@@ -83,7 +78,7 @@
                     $id = $_POST['id'];
                     $nome = $_POST['nome'];
                     $regra_comissao = $_POST['regra_comissao'];
-                    $dados = $_POST['telefone'];
+                    $dados = $_POST['dados'];
                     $sql = "update comissario set nome = '$nome',regra_comissao = '$regra_comissao', dados = '$dados' where id = $id";
                     mysqli_query($bancodedados,$sql);
                 }
@@ -91,13 +86,41 @@
                     $id = $_POST['id'];
                     $nome = $_POST['nome'];
                     $regra_comissao = $_POST['regra_comissao'];
-                    $dados = $_POST['telefone'];
+                    $dados = $_POST['dados'];
                     $sql = "insert into comissario(nome,regra_comissao,dados) values('$nome', '$regra_comissao','$dados')";
                     mysqli_query($bancodedados,$sql);
                 
                 }
                 }
+              ?>
+        <div class="row" style="margin-top:20px;">
+          <h2 class="display-6">Comissários cadastrados </h2>
+        </div>
+        <div class="row">
+          <table class="table">
+            <tr>
+              <th>Nome comissário</th>
+              <th>Regra Comissão</th>
+              <th>Dados</th>
+              <th class="tdmenor">Editar</th>
+            </tr>
+          <?php
+            $sql =  "select id, nome, regra_comissao, dados from comissario";
+            $resultado = mysqli_query($bancodedados,$sql);
+            while($linha =  mysqli_fetch_array($resultado))
+            {
+                echo "<tr><td>".$linha['nome']."</td>";
+                echo "<td>".$linha['regra_comissao']."</td>";
+                echo "<td>".$linha['dados']."</td>";
+  
+
+             echo "<td><a href='controle_comissarios.php?opcao=a&id=".$linha['id']."'>Editar</a></td></tr>";
+            }
+
             ?>
+          </table>
+
+        </div>
         </div>
     </div>
 
