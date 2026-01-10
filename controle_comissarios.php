@@ -10,7 +10,7 @@
     <title>Controle de Comissários</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles/auth.css" rel="stylesheet">
+    <link href="styles/auth_new.css" rel="stylesheet">
   </head>
 
   <body>
@@ -37,9 +37,9 @@
   <main role="main">
     <div class="main">
         <div class="container">
-          <h1 class="title" >Controle de Comissários</h1>
+          <h1 class="title">Controle de Comissários</h1>
           <br>
-          <br>
+          
             <form action="controle_comissarios.php" method="POST" class="form">
 
                 <div class="form-group w-100 mb-3">
@@ -93,35 +93,37 @@
                 }
                 }
               ?>
-        <div class="row" style="margin-top:20px;">
-          <h2 class="display-6">Comissários cadastrados </h2>
-        </div>
-        <div class="row">
-          <table class="table">
-            <tr>
-              <th>Nome comissário</th>
-              <th>Regra Comissão</th>
-              <th>Dados</th>
-              <th class="tdmenor">Editar</th>
-            </tr>
-          <?php
-            $sql =  "select id, nome, regra_comissao, dados from comissario";
-            $resultado = mysqli_query($bancodedados,$sql);
-            while($linha =  mysqli_fetch_array($resultado))
-            {
-                echo "<tr><td>".$linha['nome']."</td>";
-                echo "<td>".$linha['regra_comissao']."</td>";
-                echo "<td>".$linha['dados']."</td>";
-  
+              <br>
+          <div class="row" style="margin-top:20px;">
+            <h2 class="title">Comissários cadastrados </h2>
+          </div>
+          <div class="row">
+            <table class="table">
+              <tr>
+                <th>Nome comissário</th>
+                <th>Regra Comissão</th>
+                <th>Dados</th>
+                <th class="tdmenor">Editar</th>
+              </tr>
+            <?php
+              $sql =  "select id, nome, regra_comissao, dados from comissario";
+              $resultado = mysqli_query($bancodedados,$sql);
+              while($linha =  mysqli_fetch_array($resultado))
+              {
+                  echo "<tr><td>".$linha['nome']."</td>";
+                  echo "<td>".$linha['regra_comissao']."</td>";
+                  echo "<td>".$linha['dados']."</td>";
+    
 
-             echo "<td><a href='controle_comissarios.php?opcao=a&id=".$linha['id']."'>Editar</a></td></tr>";
-            }
+              echo "<td><a href='controle_comissarios.php?opcao=a&id=".$linha['id']."'>Editar</a></td></tr>";
+              }
 
-            ?>
-          </table>
-
+              ?>
+            </table>
+          
         </div>
-        </div>
+      </div>
+      
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

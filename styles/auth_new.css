@@ -10,15 +10,12 @@
 }
 
 .form {
-  /*display: flex;*/
-  /*flex-direction: column;*/
   align-items:center;
   gap: 1rem;
   padding: 1rem;
   border-radius: 1rem;
   background-color: var(--white);
   box-shadow: 0 0.25rem 0.5rem #1e1e1e3f;
-  /*width: 27rem;*/
   width: 90vw !important;
   max-width: 1200px;
 }
@@ -181,9 +178,9 @@ color: var(--white-100);
 }
 .tabela{
  
-  border-collapse: separate; /* Permite que o border-radius funcione corretamente */
-  border-spacing: 0;       /* Remove o espaço entre as células */
-  border-radius: 15px;     /* Aplica cantos arredondados a todos os cantos */
+  border-collapse: separate; 
+  border-spacing: 0;       
+  border-radius: 15px;     
   overflow: hidden;    
   align-items:center;
   border-radius: 1rem;
