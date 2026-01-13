@@ -19,8 +19,8 @@
             PAGAMENTO <span class="contrast">APROVADO</span>
         </h1>
 
-        <div class="form" style="margin-top: 2rem; text-align: center;">
-            <p class="logo" style="font-size: 1.5rem;">
+        <div class="form">
+            <p class="logo">
                 PEDIDO <span class="contrast-logo">#<?= $pedido_id ?></span>
             </p>
             

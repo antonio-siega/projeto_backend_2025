@@ -51,7 +51,7 @@ if (!$pedido) {
         </button>
     </form>
 
-    <div id="log" class="text" style="margin-top:15px;">
+    <div id="log" class="text">
         Aguardando ação...
     </div>
 
