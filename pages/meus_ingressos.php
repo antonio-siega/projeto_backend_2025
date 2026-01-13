@@ -7,7 +7,7 @@ $pedido_id = $_GET['pedido_id'] ?? 1;
 
 $db = (new Conexao())->getConexao();
 
-$stmt = $db->prepare("
+$stmt = $db->prepare(" 
     SELECT 
         i.*, 
         e.nome AS evento_nome, 
@@ -33,6 +33,7 @@ $ingressos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../styles/pages/index.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
+        /* Estilos específicos para o componente de Ingresso (Ticket Card) */
         .ticket-container {
             display: flex;
             flex-wrap: wrap;
@@ -42,10 +43,10 @@ $ingressos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         .ticket-card {
-            background: var(--white);
+            background: var(--white); 
             border-left: 0.8rem solid var(--color-green); 
             border-radius: 1.6rem;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow); 
             width: 35rem;
             overflow: hidden;
             display: flex;
@@ -76,7 +77,7 @@ $ingressos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .qr-wrapper {
             background: #fff;
             padding: 1rem;
-            border: 1px solid var(--color-gray);
+            border: 1px solid var(--color-gray-100);
             border-radius: 1rem;
         }
 
@@ -86,7 +87,7 @@ $ingressos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
             font-size: 1.3rem;
-            border-top: 1px dashed var(--color-gray);
+            border-top: 1px dashed var(--color-gray-100);
             padding-top: 1.5rem;
         }
 
@@ -99,7 +100,7 @@ $ingressos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         .info-item span {
-            color: var(--black);
+            color: var(--black); /* */
             font-weight: 700;
         }
 
@@ -126,11 +127,6 @@ $ingressos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 
-    <header class="header">
-        <div class="title">IF Ticket</div>
-        <i class="ph ph-ticket" style="font-size: 2.4rem; color: var(--color-green);"></i>
-    </header>
-
     <main class="main">
         <h1 class="section-title" style="text-align: center; margin-top: 2rem;">Seus Ingressos</h1>
         
@@ -138,7 +134,7 @@ $ingressos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($ingressos as $ing): ?>
                 <div class="ticket-card">
                     <div class="ticket-header">
-                        <div class="event-name"><?= $ing['evento_nome'] ?></div>
+                        <div class="event-name"><?= htmlspecialchars($ing['evento_nome']) ?></div>
                     </div>
 
                     <div class="ticket-body">
@@ -153,7 +149,7 @@ $ingressos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="info-grid">
                             <div class="info-item" style="grid-column: span 2;">
                                 <label>Titular</label>
-                                <span><?= $ing['titular_nome'] ?></span>
+                                <span><?= htmlspecialchars($ing['titular_nome']) ?></span>
                             </div>
                             <div class="info-item">
                                 <label>Data e Hora</label>
@@ -161,7 +157,7 @@ $ingressos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                             <div class="info-item">
                                 <label>Local</label>
-                                <span><?= $ing['evento_local'] ?></span>
+                                <span><?= htmlspecialchars($ing['evento_local']) ?></span>
                             </div>
                         </div>
                     </div>

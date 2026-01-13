@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualização de Ingresso | IF Ticket</title>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Definindo as variáveis do seu projeto diretamente aqui */
+        :root {
+            --color-green: #2ecc71; /* Cor extraída do seu global.css */
+            --color-green-100: #e8f5e9;
+            --color-green-200: #27ae60;
+            --color-gray-50: #f9f9f9;
+            --color-gray-100: #e1e1e1;
+            --color-gray-200: #757575;
+            --white: #ffffff; /* */
+            --black: #121212; /* */
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* */
+            --font-main: 'Inter', sans-serif; /* */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+
+        body {
+            background-color: var(--color-gray-50);
+            color: var(--black);
+        }
+
+        /* Estrutura do Header */
+        .header {
+            background: #1a1a1a;
+            color: white;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header .title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-green);
+        }
+
+        /* Container dos Ingressos */
+        .main-container {
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.4rem;
+            margin-bottom: 2rem;
+            color: var(--black);
+        }
+
+        /* O CARD DO INGRESSO */
+        .ticket-card {
+            background: var(--white);
+            width: 100%;
+            max-width: 38rem;
+            border-radius: 1.6rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border-left: 1rem solid var(--color-green); /* Borda lateral temática */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ticket-header {
+            background: var(--color-green-100);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--color-gray-100);
+        }
+
+        .event-name {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--color-green-200);
+            text-transform: uppercase;
+        }
+
+        .ticket-body {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .status-badge {
+            background: #d4edda;
+            color: #155724;
+            padding: 0.6rem 1.5rem;
+            border-radius: 5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .qr-area {
+            padding: 1.5rem;
+            background: white;
+            border: 2px solid var(--color-gray-50);
+            border-radius: 1.5rem;
+        }
+
+        .info-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            border-top: 2px dashed var(--color-gray-100);
+            padding-top: 2rem;
+        }
+
+        .info-item label {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--color-gray-200);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-item span {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .ticket-footer {
+            background: var(--color-gray-50);
+            padding: 1.5rem;
+            text-align: center;
+            font-family: monospace;
+            color: var(--color-gray-200);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="title">IF Ticket</div>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <span>Olá, Bee!</span>
+            <i class="ph ph-user-circle" style="font-size: 2.5rem;"></i>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <h1 class="section-title">Seu Ingresso Digital</h1>
+
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <div class="event-name">Semana de Tecnologia 2026</div>
+            </div>
+
+            <div class="ticket-body">
+                <div class="status-badge">ATIVO / EMITIDO</div>
+                
+                <div class="qr-area">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=BEE-DOC-12345" alt="QR Code" width="180">
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item" style="grid-column: span 2;">
+                        <label>Titular</label>
+                        <span>BEE DA SILVA</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Data e Hora</label>
+                        <span>14/01/2026 - 19:00</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Local</label>
+                        <span>Auditório Principal</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket-footer">
+                VALIDAÇÃO: 8da9c7d123e4f5g6h7i8j9k0l1m2n3o4
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
