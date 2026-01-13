@@ -1,0 +1,42 @@
+/*
+  <button class="button">Texto</button>
+*/
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40rem;
+  max-width: 40rem;
+  max-width: 100%;
+  padding: 1.6rem;
+  font-weight: 700;
+
+  color: var(--white);
+  background-color: var(--color-green);
+  border-radius: 0.8rem;
+
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--color-green-100);
+}
+
+.button:focus-visible {
+  outline: 0.3rem solid var(--color-green-200);
+  outline-offset: 0.2rem;
+}
+
+.button:disabled {
+  background-color: var(--color-gray-200);
+  cursor: not-allowed;
+}
+
+.button-secundary {
+  background-color: var(--color-gray-100);
+}
+
+.button-secundary:hover {
+  background-color: var(--color-gray-200);
+}

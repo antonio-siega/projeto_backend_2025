@@ -1,10 +1,5 @@
 /* ===== ESTILOS NAVBAR - ARQUIVO SEPARADO PARA GARANTIR APLICAÇÃO ===== */
 
-body {
-  display: flex;
-  flex-direction: column;
-}
-
 body > .navbar {
   position: fixed;
   top: 0;

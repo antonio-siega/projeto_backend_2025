@@ -1,0 +1,99 @@
+/*
+  <div class="dropdown-wrapper">
+    <span class="dropdown-label">Texto</span>
+    <select required>
+      <option value="" disabled selected>Texto</option>
+      <option value="1">Texto</option>
+      <option value="2">Texto</option>
+      <option value="3">Texto</option>
+    </select>
+  </div>
+*/
+
+.dropdown-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 40rem;
+  border: 0.2rem solid var(--color-gray-100);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.3s ease;
+}
+
+.dropdown-wrapper:focus-within,
+.dropdown-wrapper:hover {
+  border-color: var(--color-green);
+}
+
+.dropdown-label {
+  padding: 1.6rem;
+  color: var(--color-gray-100);
+  white-space: nowrap;
+  position: relative;
+}
+
+.dropdown-label::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.15rem;
+  height: 50%;
+  background-color: var(--color-gray-100);
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-wrapper:focus-within .dropdown-label,
+.dropdown-wrapper:hover .dropdown-label {
+  color: var(--color-green);
+}
+
+.dropdown-wrapper:focus-within .dropdown-label::after,
+.dropdown-wrapper:hover .dropdown-label::after {
+  background-color: var(--color-green);
+}
+
+.dropdown-wrapper select {
+  flex: 1;
+  padding: 1.6rem;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  color: var(--black);
+}
+
+.dropdown-wrapper select:invalid {
+  color: var(--color-gray-100);
+}
+
+.dropdown-wrapper select option {
+  color: var(--black);
+}
+
+.dropdown-wrapper select option[value=""] {
+  color: var(--color-gray-100);
+}
+
+.dropdown-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 1.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--color-gray-100);
+  transition: color 0.3s ease;
+}
+
+.dropdown-wrapper:hover::after,
+.dropdown-wrapper:focus-within::after {
+  color: var(--color-green);
+}
+
+.dropdown-wrapper select option:checked {
+  background-color: var(--color-green);
+  color: var(--white);
+}

@@ -1,0 +1,72 @@
+/*
+  <div class="input-wrapper">
+    <span class="input-label">Texto</span>
+    <input type="text" placeholder="Texto" />
+  </div>
+*/
+
+.input-wrapper {
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  width: 40rem;
+  max-width: 40rem;
+  border: 0.2rem solid var(--color-gray-100);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.input-wrapper:focus-within,
+.input-wrapper:hover {
+  border-color: var(--color-green);
+}
+
+.input-label {
+  padding: 1.6rem;
+  color: var(--color-gray-100);
+  white-space: nowrap;
+  position: relative;
+}
+
+.input-label::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.15rem;
+  height: 50%;
+  background-color: var(--color-gray-100);
+  transition: background-color 0.3s ease;
+}
+
+.input-wrapper:focus-within .input-label,
+.input-wrapper:hover .input-label {
+  color: var(--color-green);
+}
+
+.input-wrapper:focus-within .input-label::after,
+.input-wrapper:hover .input-label::after {
+  background-color: var(--color-green);
+}
+
+.input-wrapper input {
+  flex: 1;
+  padding: 1.6rem;
+  font-family: inherit;
+  outline: none;
+  caret-color: var(--color-gray-100);
+}
+
+.input-wrapper input::placeholder {
+  color: var(--color-gray-100);
+}
+
+input[type="date"] {
+  color: var(--black);
+}
+
+input[type="date"].default-date {
+  color: var(--color-gray-100);
+}

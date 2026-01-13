@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bem vindo</title>
+    <link rel="stylesheet" href="../../styles/global.css" />
+    <link rel="stylesheet" href="./auth.css" />
+  </head>
+  <body>
+    <form id="loginForm" class="form">
+      <img src="../../assets/images/logo.png" alt="logo" class="logo" />
+      <hr />
+
+      <h2 class="title">LOGIN</h2>
+
+      <div class="input-wrapper">
+        <span class="input-label">Nome</span>
+        <input type="text" placeholder="Insira seu nome" required />
+      </div>
+
+      <div class="input-wrapper">
+        <span class="input-label">Senha</span>
+        <input type="password" placeholder="Insira sua senha" required />
+      </div>
+
+      <button type="submit" class="button">Entrar</button>
+      <a href="#" id="showRegister" class="link">Não tenho conta</a>
+    </form>
+
+    <form id="registerForm" class="form">
+      <img src="../../assets/images/logo.png" alt="logo" class="logo" />
+      <hr />
+
+      <h2 class="title">CADASTRO</h2>
+
+      <div class="input-wrapper">
+        <span class="input-label">Nome</span>
+        <input type="text" placeholder="Insira seu nome" required />
+      </div>
+
+      <div class="input-wrapper">
+        <span class="input-label">Email</span>
+        <input type="email" placeholder="Insira seu email" required />
+      </div>
+
+      <div class="input-wrapper">
+        <span class="input-label">Senha</span>
+        <input
+          type="password"
+          id="registerPassword"
+          placeholder="Insira sua senha"
+          required
+        />
+      </div>
+
+      <div class="input-wrapper">
+        <span class="input-label">Confirmar</span>
+        <input
+          type="password"
+          id="registerConfirmPassword"
+          placeholder="Confirme sua senha"
+          required
+        />
+      </div>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="termsCheckbox" />
+        <label id="openTerms" for="termsCheckbox">Aceito os termos</label>
+      </div>
+
+      <button type="submit" class="button" id="submitButton" disabled>
+        Criar
+      </button>
+      <a href="#" id="showLogin" class="link">Já tenho conta</a>
+    </form>
+
+    <div class="modal-wrapper" id="termsModal">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
+        <header class="modal-header">
+          <h2 class="modal-title">Título do Modal</h2>
+        </header>
+
+        <div class="modal-content">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
+            error deserunt excepturi veritatis autem inventore cum, iste
+            pariatur! Dolor, numquam aut commodi nemo dolore molestiae
+            distinctio beatae harum ab cumque.
+          </p>
+        </div>
+
+        <footer class="modal-footer">
+          <button type="button" class="button button-secundary" id="closeModal">
+            Cancelar
+          </button>
+          <button type="button" class="button" id="confirmTerms">
+            Confirmar
+          </button>
+        </footer>
+      </div>
+    </div>
+
+    <script src="./auth.js"></script>
+  </body>
+</html>

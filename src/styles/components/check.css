@@ -1,0 +1,47 @@
+/*
+  <div class="checkbox-container">
+    <input type="checkbox" id="termsCheckbox" />
+    <label id="openTerms" for="termsCheckbox">Texto</label>
+  </div>
+*/
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.checkbox-container input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 0.2rem solid var(--color-gray-100);
+
+  cursor: pointer;
+  border-radius: 0.2rem;
+  position: relative;
+}
+
+.checkbox-container input[type="checkbox"]:checked {
+  background-color: var(--color-green);
+  border-color: var(--color-green);
+}
+
+.checkbox-container input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: var(--white);
+  position: absolute;
+  top: -0.49rem;
+  left: 0.1rem;
+}
+
+.checkbox-container label {
+  cursor: pointer;
+  color: var(--color-gray-100);
+}
+
+.checkbox-container input[type="checkbox"]:focus-visible {
+  outline: 0.3rem solid var(--color-green-200);
+  outline-offset: 0.2rem;
+}

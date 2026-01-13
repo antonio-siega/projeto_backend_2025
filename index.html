@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inicio</title>
-    <link rel="stylesheet" href="styles/index.css" />
 
+    <link rel="stylesheet" href="./src/styles/global.css" />
+    <link rel="stylesheet" href="./src/styles/index.css" />
     <link
       rel="stylesheet"
       type="text/css"
@@ -16,21 +17,58 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
     />
-    <script src="scripts/index.js" defer></script>
   </head>
+
   <body>
+    <header class="header">
+      <h1 class="title">Olá, Nome</h1>
+      <i class="ph ph-list" id="openModal"></i>
+    </header>
+
+    <div class="modal-wrapper" id="termsModal">
+      <div class="modal main-modal">
+        <header class="modal-header">
+          <h2 class="modal-title">Configurações</h2>
+        </header>
+
+        <div class="modal-content">
+          <button class="button" data-action="edit">Editar conta</button>
+          <button class="button" data-action="create">Criar evento</button>
+          <a href="#" class="button">Gerenciar evento</a>
+          <button class="button" data-action="join">Entrar em um evento</button>
+          <a href="./src/pages/auth/auth.html" class="link">Sair do sistema</a>
+        </div>
+      </div>
+
+      <div class="modal secondary-modal" id="secondaryModal">
+        <header class="modal-header">
+          <h2 class="modal-title" id="secondaryTitle"></h2>
+        </header>
+        <div class="modal-content" id="secondaryContent"></div>
+      </div>
+    </div>
+
     <main class="main">
-      <h1 class="logo"><i class="contrast-logo">IF</i>TICKETS</h1>
-      <h1 class="title">
-        COMPRE <i class="contrast">INGRESSOS</i> DE MANEIRA RÁPIDA E FÁCIL
-      </h1>
-      <a href="pages/auth.html" class="button" onclick="escolher('login')">
-        Entrar agora <i class="ph ph-arrow-right"></i
-      ></a>
-      <a href="pages/auth.html" class="link" onclick="escolher('cadastrar')"
-        >Criar conta</a
-      >
-      <a href="pages/eventos.html" class="link">Gerenciar Eventos</a>
+      <section class="catalog-section">
+        <h2 class="section-title">Descubra novos eventos</h2>
+        <div class="catalog-row" id="discoverEvents">
+          <div class="card">Evento 1</div>
+          <div class="card">Evento 2</div>
+          <div class="card">Evento 3</div>
+        </div>
+      </section>
+
+      <section class="catalog-section">
+        <h2 class="section-title">Seus eventos</h2>
+        <div class="catalog-row" id="yourEvents"></div>
+      </section>
+
+      <section class="catalog-section">
+        <h2 class="section-title">Seus ingressos</h2>
+        <div class="catalog-row" id="yourTickets"></div>
+      </section>
     </main>
+
+    <script src="./src/scripts/index.js"></script>
   </body>
 </html>

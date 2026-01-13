@@ -1,0 +1,104 @@
+/*
+  <div class="modal-wrapper" id="termsModal">
+    <div
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <header class="modal-header">
+        <h2 class="modal-title">Título do Modal</h2>
+      </header>
+
+      <div class="modal-content">
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
+          error deserunt excepturi veritatis autem inventore cum, iste
+          pariatur! Dolor, numquam aut commodi nemo dolore molestiae
+          distinctio beatae harum ab cumque.
+        </p>
+      </div>
+
+      <footer class="modal-footer">
+        <button type="button" class="button button-secundary" id="closeModal">
+          Cancelar
+        </button>
+        <button type="button" class="button" id="confirmTerms">
+          Confirmar
+        </button>
+      </footer>
+    </div>
+  </div>
+*/
+
+.modal-wrapper {
+  position: fixed;
+  inset: 0;
+  background: var(--color-gray);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-wrapper.active {
+  display: flex;
+}
+
+.modal {
+  max-width: 48rem;
+  background: var(--white);
+  border-radius: 0.8rem;
+  box-shadow: var(--shadow);
+  padding: 1.6rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  max-height: calc(100vh - 3.2rem);
+  overflow: hidden;
+}
+
+.modal {
+  animation: modal-in 0.2s ease-out;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.modal-content {
+  scrollbar-width: none;
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.6rem;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal {
+    animation: none;
+  }
+}
