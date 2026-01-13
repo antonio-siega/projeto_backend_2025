@@ -8,7 +8,6 @@ require_once __DIR__ . '/../includes/db.php';
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
 
-
 $pedido_id = (int)($_REQUEST['pedido_id'] ?? 0);
 
 if ($pedido_id <= 0) {
@@ -24,25 +23,18 @@ try {
 
     $db = (new Conexao())->getConexao();
 
-    
     $stmt = $db->prepare("SELECT total_liquido FROM pedido WHERE id = ?");
     $stmt->execute([$pedido_id]);
     $pedido = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$pedido) {
         throw new Exception('Pedido não encontrado');
-    if (!$pedido) {
-        throw new Exception('Pedido não encontrado');
     }
 
     $total = (float)$pedido['total_liquido'];
-    $total = (float)$pedido['total_liquido'];
-
-
 
     $client = new PreferenceClient();
 
- 
     $preference = $client->create([
         "items" => [
             [
@@ -59,12 +51,10 @@ try {
         ]
     ]);
 
-    
     if (empty($preference->init_point)) {
         echo json_encode([
             'status' => 'erro',
-            'mensagem' => 'Mercado Pago não retornou link de pagamento',
-            'debug' => $preference
+            'mensagem' => 'Mercado Pago não retornou link de pagamento'
         ]);
         exit;
     }
@@ -78,7 +68,6 @@ try {
     http_response_code(500);
     echo json_encode([
         'status' => 'erro',
-        'msg' => $e->getMessage(),
-        'trace' => $e->getTraceAsString()
+        'msg' => $e->getMessage()
     ]);
 }
