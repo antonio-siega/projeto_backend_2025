@@ -4,7 +4,7 @@
 class GeradorDeIngressos {
 
     public static function emitirIngressos(PDO $db, $pedidoId) {
-        // 1. Obter dados do Pedido e Cliente (titular)
+        // obter dados do pedido e cliente
         $stmt = $db->prepare("
             SELECT p.quantidade, c.nome AS titular_nome, c.documento AS titular_documento
             FROM pedido p
