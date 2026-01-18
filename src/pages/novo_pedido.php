@@ -95,10 +95,19 @@
               <select class="input" name="canal_venda" id="canal_venda" required>
                 <option value="">-- Selecione --</option>
                 <?php
+                  if(isset($_GET["eventoId"]) || isset($_GET["comissarioId"]))
+        				  {
+          					echo "<option value='comissario' selected>Comissário</option>";
+          					echo "<script>const selectCanalVenda = document.getElementById('canal_venda');
+            						  selectCanalVenda.setAttribute('disabled','true');
+            						  selectCanalVenda.setAttribute('style','background-color: var(--grey-50); color: black');</script>";
+        				  }
+        				  else {
                   $opcoes = array('ecommerce' => 'Ecommerce','comissario' => 'Comissário','bilheteria' => 'Bilheteria');
                   foreach($opcoes as $val => $op) {
                     $sel = (isset($canal_venda) && $canal_venda == $val) ? ' selected' : '';
                     echo "<option value='$val'$sel>$op</option>";
+                  }
                   }
                 ?>
             </select>
@@ -107,6 +116,21 @@
               <select class="input" name="setor_id" id="setor" required>
                 <option value="">-- Selecione um Setor --</option>
                 <?php
+                  if(isset($_GET["setorId"]))
+          				{
+          					$setorId = $_GET['setorId'];
+          					$sql = "select id, nome from setor where id = $setorId";
+          					$resultado = mysqli_query($bancodedados,$sql);
+          					while($linha = mysqli_fetch_array($resultado))
+          					{
+          						echo "<option value='". $linha['id'] ."' selected>". $linha['nome'] ."</option>";
+          						echo "<script>const selectSetor = document.getElementById('setor');
+          						      selectSetor.setAttribute('disabled','true');
+          							    selectSetor.setAttribute('style','background-color: var(--grey-50); color: black');</script>";
+          					}
+        				  }
+        				  else {
+                  
                   $sql = "select id, nome from setor order by nome";
                   $resultado = mysqli_query($bancodedados,$sql);
                   if($resultado && mysqli_num_rows($resultado) > 0) {
@@ -120,6 +144,7 @@
                   } else {
                     echo "<option>Nenhum setor disponível</option>";
                   }
+                  }
                 ?>      
               </select>
             <div>
@@ -127,6 +152,21 @@
                 <select class="input" name="lote_id" id="lote" required>
                   <option value="">-- Selecione um Lote --</option>
                   <?php
+                    if(isset($_GET["loteId"]))
+          				  {
+            					$loteId = $_GET["loteId"];
+            					$sql = "select l.id, l.preco, s.nome as setor_nome from lote l inner join setor s on l.setor_id = s.id where l.id = $loteId and l.status = 'ativo' order by s.nome, l.preco";
+            					$resultado = mysqli_query($bancodedados,$sql);
+            					while($linha = mysqli_fetch_array($resultado))
+            					{
+            						echo "<option value='". $linha['id'] ."' selected>". $linha['setor_nome']." - R$ ".$linha['preco'] ."</option>";
+            						echo "<script>const selectLote = document.getElementById('lote');
+            						      selectLote.setAttribute('disabled','true');
+            							    selectLote.setAttribute('style','background-color: var(--grey-50); color: black');</script>";
+            					}
+          				  }
+          				  else {
+                    
                     $sql = "select l.id, l.preco, s.nome as setor_nome from lote l inner join setor s on l.setor_id = s.id where l.status = 'ativo' order by s.nome, l.preco";
                     $resultado = mysqli_query($bancodedados,$sql);
                     if($resultado && mysqli_num_rows($resultado) > 0) {
@@ -139,6 +179,7 @@
                       }
                     } else {
                       echo "<option>Nenhum lote disponível</option>";
+                    }
                     }
                   ?>     
                 </select>

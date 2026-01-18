@@ -20,7 +20,7 @@
 
   <body>
     <?php
-      include_once('conecta.php');
+      require_once(__DIR__ . '/../../conecta.php');
       
     // Recupera os valores enviados pelo formulário, se existirem
     $organizacao_id = isset($_POST['organizacao_id']) ? $_POST['organizacao_id'] : null;
