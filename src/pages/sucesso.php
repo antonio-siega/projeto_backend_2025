@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../../includes/db.php'; 
+require_once(__DIR__ . '/../../conecta.php');; 
 session_start();
 
-$pedido_id = $_GET['pedido_id'] ?? null; 
+$pedido_id = $_GET['id'] ?? null; 
 ?>
 
 <!DOCTYPE html>
@@ -10,9 +10,9 @@ $pedido_id = $_GET['pedido_id'] ?? null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagamento Aprovado | IF Ticket</title>
+    <title>Pagamento Aprovado</title>
     <link rel="stylesheet" href="../styles/global.css">
-    <link rel="stylesheet" href="../styles/pages/index.css">
+    <link rel="stylesheet" href="../styles/index.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         .contrast { color: var(--color-green); }
@@ -36,7 +36,7 @@ $pedido_id = $_GET['pedido_id'] ?? null;
                 Seu ingresso foi gerado com sucesso e já está disponível.
             </p>
 
-            <a href="meus_ingressos.php?pedido_id=<?= $pedido_id ?>" class="button" style="text-decoration: none; width: 100%;">
+            <a href="meus_ingressos.php?id=<?= $pedido_id ?>" class="button" style="text-decoration: none; width: 100%;">
                 <i class="ph-fill ph-ticket" style="margin-right: 1rem;"></i> Ver Ingressos
             </a>
         </div>

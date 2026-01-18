@@ -1,5 +1,8 @@
 <?php
 require_once(__DIR__ . '/../../conecta.php');
+session_start();
+
+$db = (new Conexao())->getConexao();
 
 if (!isset($_GET['id'])) {
     die("Pedido não informado.");
@@ -11,11 +14,12 @@ $sql = "
 SELECT p.*, c.nome AS cliente_nome 
 FROM pedido p 
 LEFT JOIN cliente c ON p.cliente_id = c.id
-WHERE p.id = $pedido_id
+WHERE p.id = :id
 ";
 
-$resultado = mysqli_query($bancodedados, $sql);
-$pedido = mysqli_fetch_assoc($resultado);
+$stmt = $db->prepare($sql);
+$stmt->execute(['id' => $pedido_id]);
+$pedido = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$pedido) {
     die("Pedido não encontrado.");
@@ -26,9 +30,9 @@ if (!$pedido) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finalizar Compra | IF Ticket</title>
+    <title>Finalizar Compra</title>
     <link rel="stylesheet" href="../styles/global.css">
-    <link rel="stylesheet" href="../styles/pages/index.css">
+     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         .contrast { color: var(--color-green); }
@@ -79,7 +83,7 @@ document.getElementById('form-pagar').addEventListener('submit', async function(
     const pedidoIdValue = this.querySelector('input[name="pedido_id"]').value;
 
     try {
-        const response = await fetch('/projeto_backend_2025/api/criar_pagamento.php', {
+        const response = await fetch('../../api/criar_pagamento.php', {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -94,10 +98,10 @@ document.getElementById('form-pagar').addEventListener('submit', async function(
         if (result.status === 'ok' && result.link_pagamento) {
             window.location.href = result.link_pagamento;
         } else {
-            window.location.href = 'pagamento_erro.php?pedido_id=' + pedidoIdValue;
+            window.location.href = 'erro.php?pedido_id=' + pedidoIdValue;
         }
     } catch (e) {
-        window.location.href = 'pagamento_erro.php?pedido_id=' + pedidoIdValue;
+        window.location.href = 'erro.php?pedido_id=' + pedidoIdValue;
     }
 });
 </script>
