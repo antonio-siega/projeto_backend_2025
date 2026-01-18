@@ -217,7 +217,12 @@
             if(mysqli_query($bancodedados,$sql))
             {
               $pedido_id = mysqli_insert_id($bancodedados);
-              header("Location: comprar.php?id=" . $pedido_id);
+
+              $sql_pag = "INSERT INTO pagamento (pedido_id, valor, status) 
+              VALUES ($pedido_id, '$total_liquido', 'pendente')";
+              mysqli_query($bancodedados, $sql_pag);
+
+              echo "<script>window.location.href='comprar.php?id=$pedido_id';</script>";
               exit();
             }
           }

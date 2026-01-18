@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../includes/db.php'; 
 session_start();
 
-$pedido_id = $_GET['pedido_id'] ?? null; 
+$pedido_id = $_GET['id'] ?? null; 
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ $pedido_id = $_GET['pedido_id'] ?? null;
                 Seu ingresso foi gerado com sucesso e já está disponível.
             </p>
 
-            <a href="meus_ingressos.php?pedido_id=<?= $pedido_id ?>" class="button" style="text-decoration: none; width: 100%;">
+            <a href="meus_ingressos.php?id=<?= $pedido_id ?>" class="button" style="text-decoration: none; width: 100%;">
                 <i class="ph-fill ph-ticket" style="margin-right: 1rem;"></i> Ver Ingressos
             </a>
         </div>

@@ -1,5 +1,8 @@
 <?php
-require_once(__DIR__ . '/../../conecta.php');
+require_once __DIR__ . '/../../includes/db.php'; 
+session_start();
+
+$db = (new Conexao())->getConexao();
 
 if (!isset($_GET['id'])) {
     die("Pedido não informado.");
@@ -11,11 +14,12 @@ $sql = "
 SELECT p.*, c.nome AS cliente_nome 
 FROM pedido p 
 LEFT JOIN cliente c ON p.cliente_id = c.id
-WHERE p.id = $pedido_id
+WHERE p.id = :id
 ";
 
-$resultado = mysqli_query($bancodedados, $sql);
-$pedido = mysqli_fetch_assoc($resultado);
+$stmt = $db->prepare($sql);
+$stmt->execute(['id' => $pedido_id]);
+$pedido = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$pedido) {
     die("Pedido não encontrado.");

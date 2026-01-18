@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../../includes/db.php'; 
 session_start();
 
-$pedido_id = $_GET['pedido_id'] ?? 1; 
+$pedido_id = $_GET['id'] ?? 1; 
 
 $db = (new Conexao())->getConexao();
 

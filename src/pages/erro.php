@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../includes/db.php'; 
 session_start();
 
-$pedido_id = $_GET['pedido_id'] ?? null; 
+$pedido_id = $_GET['id'] ?? null; 
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ $pedido_id = $_GET['pedido_id'] ?? null;
                 Não foi possível processar o seu pagamento. Por favor, tente novamente.
             </p>
 
-            <a href="comprar.php" class="button" style="text-decoration: none; width: 100%;">
+            <a href="comprar.php?id=<?= $pedido_id ?>" class="button" style="text-decoration: none; width: 100%;">
                 <i class="ph-fill ph-arrow-counter-clockwise" style="margin-right: 1rem;"></i> Tentar Novamente
             </a>
         </div>
