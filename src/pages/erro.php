@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../includes/db.php'; 
+require_once(__DIR__ . '/../../conecta.php');
 session_start();
 
 $pedido_id = $_GET['id'] ?? null; 
@@ -10,7 +10,7 @@ $pedido_id = $_GET['id'] ?? null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erro no Pagamento | IF Ticket</title>
+    <title>Erro no Pagamento</title>
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/pages/index.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>

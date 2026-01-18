@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../includes/db.php'; 
+require_once(__DIR__ . '/../../conecta.php');
 session_start();
 
 $db = (new Conexao())->getConexao();
@@ -30,7 +30,7 @@ if (!$pedido) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finalizar Compra | IF Ticket</title>
+    <title>Finalizar Compra</title>
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/pages/index.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>

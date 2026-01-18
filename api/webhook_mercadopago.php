@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../conecta.php';
 require_once __DIR__ . '/../includes/mercado_pago.php';
 require_once __DIR__ . '/../GeradorDeIngressos.php';
 
