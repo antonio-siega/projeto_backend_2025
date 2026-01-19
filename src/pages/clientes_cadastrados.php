@@ -66,8 +66,8 @@
       }
     ?>
     <div class="navbar"> 
-      <a href="../index.html">Inicio</a> 
-      <a href="novo_pedido.php">Novo Pedido</a> 
+    <a href="../../index.html">Inicio</a> 
+    <a href="novo_pedido.php">Novo Pedido</a> 
       <a href="todos_pedidos.php">Todos os Pedidos</a>
       <a href="cadastro_clientes.php">Cadastro de Cliente</a>
       

@@ -39,7 +39,7 @@
   </head>
   <body>
        <div class="navbar"> 
-      <a href="../index.html">Inicio</a> 
+      <a href="../../index.html">Inicio</a> 
       <a href="novo_pedido.php">Novo Pedido</a> 
       <a href="todos_pedidos.php">Todos os Pedidos</a>
       <a href="cadastro_clientes.php">Cadastro de Cliente</a>
@@ -47,26 +47,76 @@
     </div>
     <?php
       require_once(__DIR__ . '/../../conecta.php');
-        if(isset($_GET['opcao']) && $_GET['opcao']=='a')
+      
+      // Processar POST primeiro (antes de qualquer output)
+      if(isset($_POST['cliente']))
+      {
+        if(isset($_POST['id']))
         {
-          $id = $_GET['id'];
-          $sql = "select * from pedido where id = $id";
-          $resultado = mysqli_query($bancodedados,$sql);
-          if ($linha = mysqli_fetch_array($resultado))
+          $id = $_POST['id'];
+          $cliente = $_POST['cliente'];
+          $canal_venda = $_POST['canal_venda'];
+          $setor_id = $_POST['setor_id'];
+          $lote_id = $_POST['lote_id'];
+          $quantidade = $_POST['quantidade'];
+          $valor_bruto = $_POST['valor_bruto'];
+          $taxa = $_POST['taxa'];
+          $desconto = $_POST['desconto'];
+          $total_liquido = $_POST['total_liquido'];
+          $sql = "update pedido set cliente_id='$cliente', canal_venda = '$canal_venda', setor_id = '$setor_id', lote_id = '$lote_id', quantidade = '$quantidade', valor_bruto = '$valor_bruto', taxa = '$taxa', desconto = '$desconto', total_liquido = '$total_liquido' where id = $id";
+          if(mysqli_query($bancodedados,$sql))
           {
-            $cliente_id = $linha['cliente_id'];
-            $canal_venda = $linha['canal_venda'];
-            $setor_id = $linha['setor_id'];
-            $lote_id = $linha['lote_id'];
-            $quantidade = $linha['quantidade'];
-            $valor_bruto = $linha['valor_bruto'];
-            $taxa = $linha['taxa'];
-            $desconto = $linha['desconto'];
-            $total_liquido = $linha['total_liquido'];
-            $status = $linha['status'];
-            $prazo_expiracao = $linha['prazo_expiracao'];
+            header('Location: todos_pedidos.php');
+            exit();
           }
         }
+        else {
+          $cliente = $_POST['cliente'];
+          $canal_venda = $_POST['canal_venda'];
+          $setor_id = $_POST['setor_id'];
+          $lote_id = $_POST['lote_id'];
+          $quantidade = $_POST['quantidade'];
+          $valor_bruto = $_POST['valor_bruto'];
+          $taxa = $_POST['taxa'];
+          $desconto = $_POST['desconto'];
+          $total_liquido = $_POST['total_liquido'];
+          $data_criacao = date('Y-m-d H:i:s');
+          $sql = "insert into pedido (cliente_id,canal_venda,setor_id,lote_id,quantidade,valor_bruto,taxa,desconto,total_liquido,data_criacao) values ('$cliente','$canal_venda','$setor_id','$lote_id','$quantidade','$valor_bruto','$taxa','$desconto','$total_liquido','$data_criacao')";
+          if(mysqli_query($bancodedados,$sql))
+          {
+            $pedido_id = mysqli_insert_id($bancodedados);
+
+            $sql_pag = "INSERT INTO pagamento (pedido_id, valor, status) 
+            VALUES ($pedido_id, '$total_liquido', 'pendente')";
+            mysqli_query($bancodedados, $sql_pag);
+
+            header('Location: comprar.php?id=' . $pedido_id);
+            exit();
+          }
+        }
+      }
+      
+      // Carregar dados para edição
+      if(isset($_GET['opcao']) && $_GET['opcao']=='a')
+      {
+        $id = $_GET['id'];
+        $sql = "select * from pedido where id = $id";
+        $resultado = mysqli_query($bancodedados,$sql);
+        if ($linha = mysqli_fetch_array($resultado))
+        {
+          $cliente_id = $linha['cliente_id'];
+          $canal_venda = $linha['canal_venda'];
+          $setor_id = $linha['setor_id'];
+          $lote_id = $linha['lote_id'];
+          $quantidade = $linha['quantidade'];
+          $valor_bruto = $linha['valor_bruto'];
+          $taxa = $linha['taxa'];
+          $desconto = $linha['desconto'];
+          $total_liquido = $linha['total_liquido'];
+          $status = $linha['status'];
+          $prazo_expiracao = $linha['prazo_expiracao'];
+        }
+      }
     ?>
   <main class="main">
    <h1 class='title'>Cadastrar Pedido</h1>
@@ -159,7 +209,7 @@
             					$resultado = mysqli_query($bancodedados,$sql);
             					while($linha = mysqli_fetch_array($resultado))
             					{
-            						echo "<option value='". $linha['id'] ."' selected>". $linha['setor_nome']." - R$ ".$linha['preco'] ."</option>";
+            						echo "<option value='". $linha['id'] ."' data-preco='".$linha['preco']."' selected>". $linha['setor_nome']." - R$ ".$linha['preco'] ."</option>";
             						echo "<script>const selectLote = document.getElementById('lote');
             						      selectLote.setAttribute('disabled','true');
             							    selectLote.setAttribute('style','background-color: var(--grey-50); color: black');</script>";
@@ -173,9 +223,9 @@
                       while($linha = mysqli_fetch_array($resultado))
                       {
                         if(isset($lote_id) && $lote_id == $linha['id'])
-                          echo "<option selected value='".$linha['id']."'>".$linha['setor_nome']." - R$ ".$linha['preco']."</option>";  
+                          echo "<option selected value='".$linha['id']."' data-preco='".$linha['preco']."'>".$linha['setor_nome']." - R$ ".$linha['preco']."</option>";  
                         else
-                          echo "<option value='".$linha['id']."'>".$linha['setor_nome']." - R$ ".$linha['preco']."</option>";
+                          echo "<option value='".$linha['id']."' data-preco='".$linha['preco']."'>".$linha['setor_nome']." - R$ ".$linha['preco']."</option>";
                       }
                     } else {
                       echo "<option>Nenhum lote disponível</option>";
@@ -218,58 +268,6 @@
             </div>
 
       </form>
-    </div>
-    <div>
-      <?php
-        if(isset($_POST['cliente']))
-        {
-          if(isset($_POST['id']))
-          {
-            $id = $_POST['id'];
-            $cliente = $_POST['cliente'];
-            $canal_venda = $_POST['canal_venda'];
-            $setor_id = $_POST['setor_id'];
-            $lote_id = $_POST['lote_id'];
-            $quantidade = $_POST['quantidade'];
-            $valor_bruto = $_POST['valor_bruto'];
-            $taxa = $_POST['taxa'];
-            $desconto = $_POST['desconto'];
-            $total_liquido = $_POST['total_liquido'];
-            $sql = "update pedido set cliente_id='$cliente', canal_venda = '$canal_venda', setor_id = '$setor_id', lote_id = '$lote_id', quantidade = '$quantidade', valor_bruto = '$valor_bruto', taxa = '$taxa', desconto = '$desconto', total_liquido = '$total_liquido' where id = $id";
-            if(mysqli_query($bancodedados,$sql))
-            {
-              header('Location: todos_pedidos.php');
-              exit();
-            }
-
-          }
-          else {
-            $cliente = $_POST['cliente'];
-            $canal_venda = $_POST['canal_venda'];
-            $setor_id = $_POST['setor_id'];
-            $lote_id = $_POST['lote_id'];
-            $quantidade = $_POST['quantidade'];
-            $valor_bruto = $_POST['valor_bruto'];
-            $taxa = $_POST['taxa'];
-            $desconto = $_POST['desconto'];
-            $total_liquido = $_POST['total_liquido'];
-            $data_criacao = date('Y-m-d H:i:s');
-            $sql = "insert into pedido (cliente_id,canal_venda,setor_id,lote_id,quantidade,valor_bruto,taxa,desconto,total_liquido,data_criacao) values ('$cliente','$canal_venda','$setor_id','$lote_id','$quantidade','$valor_bruto','$taxa','$desconto','$total_liquido','$data_criacao')";
-            if(mysqli_query($bancodedados,$sql))
-            {
-              $pedido_id = mysqli_insert_id($bancodedados);
-
-              $sql_pag = "INSERT INTO pagamento (pedido_id, valor, status) 
-              VALUES ($pedido_id, '$total_liquido', 'pendente')";
-              mysqli_query($bancodedados, $sql_pag);
-
-              echo "<script>window.location.href='comprar.php?id=$pedido_id';</script>";
-              exit();
-            }
-          }
-
-        }
-      ?>
     </div>
     <script src="../scripts/pedido_calc.js"></script>
   </body>
