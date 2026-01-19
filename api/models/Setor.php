@@ -84,5 +84,35 @@ class Setor {
         }
         return false;
     }
+
+    function update() {
+        $query = "UPDATE " . $this->table_name . " SET nome = ?, capacidade = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $this->nome = htmlspecialchars(strip_tags($this->nome));
+        $this->capacidade = htmlspecialchars(strip_tags($this->capacidade));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bind_param("sii", $this->nome, $this->capacidade, $this->id);
+        return $stmt->execute();
+    }
+
+    function delete() {
+        // Verificar se existem lotes associados
+        $check_query = "SELECT COUNT(*) as total FROM lote WHERE setor_id = ?";
+        $check_stmt = $this->conn->prepare($check_query);
+        $check_stmt->bind_param("i", $this->id);
+        $check_stmt->execute();
+        $result = $check_stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        if ($row['total'] > 0) {
+            return false; // Não pode excluir pois há lotes
+        }
+
+        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bind_param("i", $this->id);
+        return $stmt->execute();
+    }
 }
 ?>

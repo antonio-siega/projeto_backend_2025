@@ -34,11 +34,12 @@
 .modal-wrapper {
   position: fixed;
   inset: 0;
-  background: var(--color-gray);
+  background: rgba(0, 0, 0, 0.6); /* Fundo mais escuro para foco */
   display: none;
-  align-items: center;
-  justify-content: center;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
   z-index: 1000;
+  padding: 2rem;
 }
 
 .modal-wrapper.active {
@@ -46,17 +47,19 @@
 }
 
 .modal {
-  max-width: 48rem;
+  width: 100%;
+  max-width: 60rem; /* Aumentado para comportar melhor as tabelas e listas */
   background: var(--white);
-  border-radius: 0.8rem;
-  box-shadow: var(--shadow);
-  padding: 1.6rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+  padding: 2.4rem;
 
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
-  max-height: calc(100vh - 3.2rem);
+  gap: 2rem;
+  max-height: 90vh; /* Não ultrapassar a altura da tela */
   overflow: hidden;
+  position: relative;
 }
 
 .modal {
@@ -75,9 +78,26 @@
 }
 
 .modal-content {
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-green) #f0f0f0;
   overflow-y: auto;
-  max-height: 100%;
+  max-height: 70vh; /* Limita a altura para garantir que role dentro do modal */
+  padding-right: 1rem;
+}
+
+/* Personalização para navegadores Webkit (Chrome, Edge, Safari) */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: var(--color-green);
+  border-radius: 10px;
 }
 
 .modal-footer {

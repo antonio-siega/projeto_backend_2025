@@ -94,5 +94,14 @@ class Lote {
         }
         return false;
     }
+
+    function delete() {
+        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bind_param("i", $this->id);
+        
+        return $stmt->execute();
+    }
 }
 ?>

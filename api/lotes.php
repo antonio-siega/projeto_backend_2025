@@ -61,7 +61,8 @@ switch ($request_method) {
                 echo json_encode(array("message" => "Lote criado com sucesso."));
             } else {
                 http_response_code(503);
-                echo json_encode(array("message" => "Não foi possível criar o lote."));
+                $error = $db->error;
+                echo json_encode(array("message" => "Não foi possível criar o lote no banco de dados.", "error" => $error));
             }
         } else {
             http_response_code(400);

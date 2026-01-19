@@ -1,10 +1,19 @@
 @import "./reset.css";
 @import "./base.css";
+@import "./components/button.css";
+@import "./components/input.css";
+@import "./components/select.css";
+@import "./components/modal.css";
+@import "./components/link.css";
+@import "./components/form.css";
+@import "./components/check.css";
 
-@import "../styles/components/button.css";
-@import "../styles/components/input.css";
-@import "../styles/components/select.css";
-@import "../styles/components/modal.css";
-@import "../styles/components/link.css";
-@import "../styles/components/form.css";
-@import "../styles/components/check.css";
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  overflow-y: auto;
+}

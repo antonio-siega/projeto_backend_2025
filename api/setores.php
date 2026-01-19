@@ -94,8 +94,8 @@ switch ($request_method) {
                 http_response_code(200);
                 echo json_encode(array("message" => "Setor deletado com sucesso."));
             } else {
-                http_response_code(503);
-                echo json_encode(array("message" => "Não foi possível deletar o setor."));
+                http_response_code(400);
+                echo json_encode(array("message" => "Não é possível excluir este setor pois existem lotes vinculados a ele."));
             }
         } else {
             http_response_code(400);

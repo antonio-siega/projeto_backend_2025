@@ -24,6 +24,7 @@ CREATE TABLE evento (
     local_id INT,
     nome VARCHAR(255),
     descricao TEXT,
+    imagem_url VARCHAR(500),
     status ENUM('rascunho', 'publicado', 'encerrado', 'cancelado'),
     politica_cancelamento TEXT,
     data_inicio DATETIME,
@@ -65,6 +66,18 @@ CREATE TABLE cliente (
     consentimento BOOLEAN,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE comissario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    organizacao_id INT,
+    nome VARCHAR(255),
+    dados TEXT,
+    ativo BOOLEAN,
+    regra_comissao TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (organizacao_id) REFERENCES organizacao (id)
 );
 
 CREATE TABLE pedido (
@@ -132,18 +145,6 @@ CREATE TABLE checkin (
     FOREIGN KEY (ingresso_id) REFERENCES ingresso (id)
 );
 
-CREATE TABLE comissario (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    organizacao_id INT,
-    nome VARCHAR(255),
-    dados TEXT,
-    ativo BOOLEAN,
-    regra_comissao TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (organizacao_id) REFERENCES organizacao (id)
-);
-
 CREATE TABLE cupom (
     id INT AUTO_INCREMENT PRIMARY KEY,
     codigo VARCHAR(20),
@@ -187,8 +188,10 @@ CREATE TABLE usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     organizacao_id INT,
     nome VARCHAR(255),
-    perfil ENUM('organizador', 'bilheteria', 'financeiro', 'portaria', 'admin', 'cliente', 'comissario'),
-    ativo BOOLEAN,
+    email VARCHAR(255) UNIQUE,
+    senha VARCHAR(255),
+    perfil ENUM('organizador', 'bilheteria', 'financeiro', 'portaria', 'admin', 'cliente', 'comissario') DEFAULT 'cliente',
+    ativo BOOLEAN DEFAULT TRUE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (organizacao_id) REFERENCES organizacao (id)
@@ -218,5 +221,3 @@ CREATE TABLE auditoria (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuario (id)
 );
-
-

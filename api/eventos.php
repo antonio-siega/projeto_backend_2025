@@ -31,7 +31,10 @@ switch ($request_method) {
                 $evento_item = array(
                     "id" => $id,
                     "nome" => $nome,
-                    "descricao" => $descricao,
+                    "descricao" => html_entity_decode($descricao),
+                    "imagem_url" => $imagem_url,
+                    "organizacao_id" => $organizacao_id,
+                    "status" => $status,
                     "data_inicio" => $data_inicio,
                     "data_fim" => $data_fim,
                     "local_id" => $local_id,
@@ -53,18 +56,22 @@ switch ($request_method) {
 
         if (!empty($data->nome) && !empty($data->data_inicio) && !empty($data->data_fim) && !empty($data->local_id)) {
             $evento->nome = $data->nome;
+            $evento->descricao = !empty($data->descricao) ? $data->descricao : '';
+            $evento->imagem_url = !empty($data->imagem_url) ? $data->imagem_url : '';
+            $evento->organizacao_id = !empty($data->organizacao_id) ? $data->organizacao_id : null;
+            $evento->status = !empty($data->status) ? $data->status : 'agendado';
+            $evento->politica_cancelamento = !empty($data->politica_cancelamento) ? $data->politica_cancelamento : '';
             $evento->data_inicio = $data->data_inicio;
             $evento->data_fim = $data->data_fim;
             $evento->local_id = $data->local_id;
-            $evento->descricao = !empty($data->descricao) ? $data->descricao : '';
-            $evento->politica_cancelamento = !empty($data->politica_cancelamento) ? $data->politica_cancelamento : '';
-
+            
             if ($evento->create()) {
                 http_response_code(201);
                 echo json_encode(array("message" => "Evento criado com sucesso."));
             } else {
                 http_response_code(503);
-                echo json_encode(array("message" => "Não foi possível criar o evento."));
+                $error = $db->error;
+                echo json_encode(array("message" => "Não foi possível criar o evento no banco de dados.", "error" => $error));
             }
         } else {
             http_response_code(400);
