@@ -30,6 +30,7 @@
         if($_GET['opcao']=='e')
         {
             $id = $_GET['id'];
+            mysqli_query($bancodedados, "delete from pagamento WHERE pedido_id = $id");
             $sql = "delete from pedido where id = $id";
             mysqli_query($bancodedados,$sql);
         }
