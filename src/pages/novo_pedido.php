@@ -149,7 +149,7 @@
         				  {
           					echo "<option value='comissario' selected>Comissário</option>";
           					echo "<script>const selectCanalVenda = document.getElementById('canal_venda');
-            						  selectCanalVenda.setAttribute('disabled','true');
+            						  selectCanalVenda.setAttribute('onchange','this.value = ". $linha['id'] ."');
             						  selectCanalVenda.setAttribute('style','background-color: var(--grey-50); color: black');</script>";
         				  }
         				  else {
@@ -175,7 +175,7 @@
           					{
           						echo "<option value='". $linha['id'] ."' selected>". $linha['nome'] ."</option>";
           						echo "<script>const selectSetor = document.getElementById('setor');
-          						      selectSetor.setAttribute('disabled','true');
+          						      selectSetor.setAttribute('onchange','this.value = ". $linha['id'] ."');
           							    selectSetor.setAttribute('style','background-color: var(--grey-50); color: black');</script>";
           					}
         				  }
@@ -211,7 +211,7 @@
             					{
             						echo "<option value='". $linha['id'] ."' data-preco='".$linha['preco']."' selected>". $linha['setor_nome']." - R$ ".$linha['preco'] ."</option>";
             						echo "<script>const selectLote = document.getElementById('lote');
-            						      selectLote.setAttribute('disabled','true');
+            						      selectLote.setAttribute('onchange','this.value = ". $linha['id'] ."');
             							    selectLote.setAttribute('style','background-color: var(--grey-50); color: black');</script>";
             					}
           				  }
