@@ -59,12 +59,16 @@
 		<div class="container">
 			<header class="header" style="box-shadow: 0 0 0.6rem 0.4rem rgba(0, 0, 0, 0.1);">
 				<h1 class="title">Dados do Comissário</h1>
-				<i><button class="button title" onclick="modalLink.showModal()">Links (Comissão)</button></i>
 			</header>
 		</div>
 
+		<div style="display: flex; align-items: left; gap: 1.6rem;">
+			<button class="button" onclick="modalLink.showModal()">Links (Comissão)</button>
+			<a class="button" href="relatorios.php">Exibir Relatórios</a>
+		</div>
+
 		<div class="table-responsive">
-			<p>Bem-vindo, Nome</p> <!-- pegar sessao_start() em auth.php -->
+			<p style="font-weight: bold; padding-left: 1.6rem">Bem-vindo!</p>
 			<table>
 				<thead>
 				<tr>
