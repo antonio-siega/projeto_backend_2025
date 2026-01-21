@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="cad_usuario.php" class="button">Cadastrar Usuário</a>
             <a href="cad_organizacao.php" class="button">Cadastrar Organização</a>
             <a href="./auth/auth.html" class="link">Sair</a>
-        
+
         </div>
     </div>
 </div>
